@@ -15,8 +15,17 @@ class Dosen extends Model
         return $this->hasMany(JadwalKuliah::class);
     }
     public function programStudi()
-{
-    return $this->belongsTo(ProgramStudi::class, 'program_studi_id');
-}
+    {
+        return $this->belongsTo(ProgramStudi::class, 'program_studi_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function kelas()
+    {
+        return $this->hasMany(Kelas::class);
+    }
+
 
 }

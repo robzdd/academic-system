@@ -15,4 +15,9 @@ class Khs extends Model
     public function mahasiswa() {
         return $this->belongsTo(Mahasiswa::class);
     }
+    // Add tahunAkademik relationship
+    public function tahunAkademik()
+    {
+        return $this->belongsTo(TahunAkademik::class);
+    }
 }

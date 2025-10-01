@@ -16,5 +16,23 @@ class Kelas extends Model
     public function mahasiswa() {
         return $this->hasMany(Mahasiswa::class);
     }
+     public function mataKuliah()
+    {
+        return $this->belongsTo(MataKuliah::class);
+    }
+
+    public function dosen()
+    {
+        return $this->belongsTo(Dosen::class);
+    }
+
+    public function krs()
+    {
+        return $this->hasMany(Krs::class);
+    }
+    public function jadwalKuliah()
+    {
+        return $this->hasMany(JadwalKuliah::class);
+    }
 }
 

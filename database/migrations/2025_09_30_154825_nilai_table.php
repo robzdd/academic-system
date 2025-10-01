@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('nilai', function (Blueprint $table) {
             $table->id();
             $table->foreignId('krs_id')->constrained('krs')->onDelete('cascade');
+            $table->decimal('nilai_angka', 5, 2)->nullable(); // Nilai 0-100
             $table->enum('nilai_huruf', ['A', 'B', 'C', 'D', 'E'])->nullable();
             $table->decimal('nilai_bobot', 3, 2)->nullable(); // 0.00 - 4.00
             $table->timestamps();
