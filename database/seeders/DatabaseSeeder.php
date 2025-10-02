@@ -18,6 +18,7 @@ use App\Models\JadwalKuliah;
 use App\Models\Krs;
 use App\Models\Nilai;
 use App\Models\Khs;
+use App\Models\PembimbingAkademik;
 
 class DatabaseSeeder extends Seeder
 {
@@ -361,6 +362,28 @@ class DatabaseSeeder extends Seeder
             'ip_kumulatif' => 3.68,
             'total_sks_semester' => 10,
             'total_sks_kumulatif' => 82
+        ]);
+
+        // 14. Pembimbing Akademik
+        $mahasiswa1PA = PembimbingAkademik::create([
+            'mahasiswa_id' => $mahasiswa1->id,
+            'dosen_id' => $dosen1->id,
+            'tahun_akademik_id' => $tahunAkademik->id,
+            'is_active' => true
+        ]);
+
+        $mahasiswa2PA = PembimbingAkademik::create([
+            'mahasiswa_id' => $mahasiswa2->id,
+            'dosen_id' => $dosen2->id,
+            'tahun_akademik_id' => $tahunAkademik->id,
+            'is_active' => true
+        ]);
+
+        $mahasiswa3PA = PembimbingAkademik::create([
+            'mahasiswa_id' => $mahasiswa3->id,
+            'dosen_id' => $dosen1->id,
+            'tahun_akademik_id' => $tahunAkademik->id,
+            'is_active' => true
         ]);
 
         echo "✅ Database seeder berhasil dijalankan!\n";

@@ -77,6 +77,16 @@
             <p class="text-gray-600 text-sm">Tahun Akademik Aktif</p>
             <p class="font-semibold">{{ $tahunAktif->kode_tahun }} - {{ ucfirst($tahunAktif->semester) }}</p>
         </div>
+        <div>
+            <p class="text-gray-600 text-sm">Pembimbing Akademik</p>
+            <p class="font-semibold">
+                @if($pembimbingAkademik)
+                    {{ $pembimbingAkademik->dosen->user->username }}
+                @else
+                    Belum ditentukan
+                @endif
+            </p>
+        </div>
     </div>
 </div>
 @endsection

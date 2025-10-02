@@ -18,8 +18,10 @@
                             <div class="mt-2 space-x-4">
                                 <span class="text-white text-sm">IP Semester: {{ number_format($khs->ip_semester, 2) }}</span>
                                 <span class="text-white text-sm">IPK: {{ number_format($khs->ip_kumulatif, 2) }}</span>
-                                <span class="text-white text-sm">SKS Semester: {{ $khs->sks_semester }}</span>
-                                <span class="text-white text-sm">Total SKS: {{ $khs->sks_total }}</span>
+                                <span class="text-white text-sm">Pembimbing Akademik: {{ $pembimbingAkademik->dosen->user->username }}</span>
+                                <span class="text-white text-sm">SKS Semester: {{ $khs->total_sks_semester }}</span>
+                                <span class="text-white text-sm">Total SKS: {{ $khs->total_sks_kumulatif }}</span>
+                                <span class="text-white text-sm">Total SKS: {{ $khs->total_sks_kumulatif }}</span>
                             </div>
                         </div>
                         <a href="{{ route('mahasiswa.khs.download', $khs->tahun_akademik_id) }}"

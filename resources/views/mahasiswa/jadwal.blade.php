@@ -27,7 +27,7 @@
                     <td class="px-4 py-3 text-sm">{{ $jadwal->kelas->mataKuliah->nama_mk }}</td>
                     <td class="px-4 py-3 text-sm">{{ $jadwal->kelas->mataKuliah->kode_mk }}</td>
                     <td class="px-4 py-3 text-sm">{{ $jadwal->kelas->mataKuliah->sks }}</td>
-                    <td class="px-4 py-3 text-sm">{{ $jadwal->kelas->dosen->user->nama_lengkap }}</td>
+                    <td class="px-4 py-3 text-sm">{{ $jadwal->kelas->dosen->user->username }}</td>
                     <td class="px-4 py-3 text-sm">
                         <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-semibold">
                             {{ $jadwal->ruangan }}

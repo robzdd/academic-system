@@ -36,4 +36,10 @@ class Mahasiswa extends Model
         return $this->hasMany(Khs::class);
     }
 
+     // Add pembimbingAkademik relationship
+    public function pembimbingAkademik()
+    {
+        return $this->hasMany(PembimbingAkademik::class);
+    }
+
 }

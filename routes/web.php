@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboard;
-use App\Http\Controllers\Mahasiswa\KrsController;
-use App\Http\Controllers\Mahasiswa\KhsController;
-use App\Http\Controllers\Mahasiswa\JadwalController as MahasiswaJadwal;
-use App\Http\Controllers\Mahasiswa\NilaiController as MahasiswaNilai;
-use App\Http\Controllers\Dosen\DashboardController as DosenDashboard;
-use App\Http\Controllers\Dosen\KelasController;
-use App\Http\Controllers\Dosen\NilaiController as DosenNilai;
-use App\Http\Controllers\AdminBaak\DashboardController as AdminDashboard;
-use App\Http\Controllers\AdminBaak\JadwalController as AdminJadwal;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Dosen\KelasController;
+use App\Http\Controllers\Mahasiswa\KhsController;
+use App\Http\Controllers\Mahasiswa\KrsController;
+use App\Http\Controllers\Dosen\NilaiController as DosenNilai;
+use App\Http\Controllers\AdminBaak\PembimbingAkademikController;
+use App\Http\Controllers\AdminBaak\JadwalController as AdminJadwal;
+use App\Http\Controllers\Dosen\DashboardController as DosenDashboard;
+use App\Http\Controllers\Mahasiswa\NilaiController as MahasiswaNilai;
+use App\Http\Controllers\Mahasiswa\JadwalController as MahasiswaJadwal;
+use App\Http\Controllers\AdminBaak\DashboardController as AdminDashboard;
+use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboard;
 
 // ============================================
 // PUBLIC ROUTES
@@ -85,4 +86,6 @@ Route::middleware(['auth', 'role:admin_baak'])->prefix('admin')->name('admin.')-
     Route::get('/jadwal/{jadwal}/edit', [AdminJadwal::class, 'edit'])->name('jadwal.edit');
     Route::put('/jadwal/{jadwal}', [AdminJadwal::class, 'update'])->name('jadwal.update');
     Route::delete('/jadwal/{jadwal}', [AdminJadwal::class, 'destroy'])->name('jadwal.destroy');
+
+    Route::resource('pembimbing', PembimbingAkademikController::class);
 });
