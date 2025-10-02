@@ -10,9 +10,14 @@ class Khs extends Model
     use HasFactory;
 
     protected $table = 'khs';
-    protected $fillable = ['mahasiswa_id', 'tahun_akademik_id', 'ip_semester', 'ip_kumulatif', 'total_sks_semester', 'total_sks_kumulatif', 'total_sks_kumulatif'];
+    protected $fillable = ['mahasiswa_id', 'tahun_akademik_id', 'ip_semester', 'ip_kumulatif', 'total_sks_semester', 'total_sks_kumulatif'];
 
     public function mahasiswa() {
         return $this->belongsTo(Mahasiswa::class);
+    }
+    // Add tahunAkademik relationship
+    public function tahunAkademik()
+    {
+        return $this->belongsTo(TahunAkademik::class);
     }
 }

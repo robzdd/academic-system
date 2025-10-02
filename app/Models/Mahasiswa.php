@@ -27,5 +27,19 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(ProgramStudi::class, 'program_studi_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function khs()
+    {
+        return $this->hasMany(Khs::class);
+    }
+
+     // Add pembimbingAkademik relationship
+    public function pembimbingAkademik()
+    {
+        return $this->hasMany(PembimbingAkademik::class);
+    }
 
 }

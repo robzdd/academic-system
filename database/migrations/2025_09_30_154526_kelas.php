@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('dosen_id')->constrained('dosen')->onDelete('cascade');
             $table->foreignId('tahun_akademik_id')->constrained('tahun_akademik')->onDelete('cascade');
             $table->string('nama_kelas'); // A, B, C, dll
+            $table->string('wali_dosen')->default(false);
             $table->integer('kapasitas')->default(40);
             $table->integer('jumlah_mahasiswa')->default(0);
             $table->timestamps();
