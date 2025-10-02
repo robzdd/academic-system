@@ -1,80 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Mahasiswa</title>
-    <style>
-        body { margin:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#F3F4F6; color:#111827; }
-        .sidebar {
-            width:220px; height:100vh; background:#1E3A8A; color:white; position:fixed; top:0; left:0;
-            display:flex; flex-direction:column; padding:20px; box-shadow:2px 0 5px rgba(0,0,0,0.1);
-        }
-        .sidebar h2 { margin-bottom:30px; font-size:1.5rem; letter-spacing:1px; }
-        .sidebar a {
-            color:white; text-decoration:none; margin:10px 0; display:block; padding:8px 12px;
-            border-radius:6px; transition:0.2s;
-        }
-        .sidebar a:hover { background:#3B82F6; }
-        .main { margin-left:240px; padding:20px; }
-        header {
-            display:flex; justify-content:space-between; align-items:center;
-            background:#3B82F6; color:white; padding:15px 25px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);
-        }
-        .card {
-            background:white; padding:20px; margin:20px 0; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.08);
-        }
-        table { width:100%; border-collapse: collapse; margin-top:15px; }
-        table, th, td { border:1px solid #E5E7EB; }
-        th, td { padding:10px; text-align:left; }
-        th { background:#3B82F6; color:white; border-radius:6px; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard IQRA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="sidebar">
-        <h2>Siakad</h2>
-        <a href="#">Dashboard</a>
-        <a href="#">KRS</a>
-        <a href="#">KHS / Nilai</a>
-        <a href="#">Jadwal</a>
-        <a href="#">Pengumuman</a>
-    </div>
-    <div class="main">
-        <header>
-            <div>Selamat datang, Mahasiswa Test</div>
-        </header>
+<body class="bg-gray-100 font-sans">
 
-        <div class="card">
-            <h3>Ringkasan Akademik</h3>
-            <p>Semester: 4</p>
-            <p>IPK: 3.75</p>
-            <p>SKS: 110</p>
+    <!-- Header -->
+    <header class="bg-blue-900 text-white">
+        <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
+            <div class="flex items-center space-x-3">
+                <img src="file-QadSz7BRW96SpV8GNZmPk9.png" alt="Logo" class="w-10 h-10">
+                <div>
+                    <div class="text-sm">SIM Akademik</div>
+                    <div class="text-lg font-bold">IQRA BURU</div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <button class="relative">
+                        🔔
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs px-1">26</span>
+                    </button>
+                </div>
+                <div>
+                    <img src="https://i.pravatar.cc/40" alt="User" class="w-10 h-10 rounded-full">
+                </div>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>Pengumuman</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Judul</th>
-                        <th>Tanggal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Pendaftaran KRS Dibuka</td>
-                        <td>2025-10-05</td>
-                    </tr>
-                    <tr>
-                        <td>Ujian Tengah Semester</td>
-                        <td>2025-10-15</td>
-                    </tr>
-                    <tr>
-                        <td>Pengumuman Libur Nasional</td>
-                        <td>2025-10-20</td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- Navbar -->
+        <nav class="bg-blue-800">
+            <div class="max-w-7xl mx-auto flex space-x-4 p-3 text-white">
+                <a href="#" class="border-b-2 border-white pb-1">Beranda</a>
+                <a href="#">Jadwal</a>
+                <a href="#">Akademik</a>
+                <a href="#">Tingkat Akhir</a>
+                <a href="#">Hasil Studi</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Jadwal Kuliah -->
+        <div class="md:col-span-2 space-y-4">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="font-bold text-lg">Jadwal Kuliah</h2>
+                    <div>Rabu, 1 Oktober 2025 ▼</div>
+                </div>
+
+                <!-- Kelas 1 -->
+                <div class="border p-4 rounded-lg mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold">PROYEK 3 (32)</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-1">10:00 - 11:40 WIB | 3 SKS</div>
+                    <div class="text-sm text-gray-600 mb-1">Nidan</div>
+                    <div class="text-sm text-gray-600 mb-1">Pertemuan ke 13 | Hadir (9 / 48)</div>
+                    <div class="text-sm text-gray-600">LAB. DATA SCIENCE</div>
+                </div>
+
+                <!-- Kelas 2 -->
+                <div class="border p-4 rounded-lg">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold">PEMELIHARAAN PERANGKAT LUNAK (32)</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-1">13:30 - 16:00 WIB | 3 SKS</div>
+                    <div class="text-sm text-gray-600 mb-1">Robi</div>
+                    <div class="text-sm text-gray-600 mb-1">Pertemuan ke 9 | Hadir (9 / 48)</div>
+                </div>
+            </div>
         </div>
-    </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-4">
+            <!-- Profil -->
+            <div class="bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center space-x-4">
+                    <img src="https://i.pravatar.cc/50" alt="Avatar" class="w-12 h-12 rounded-full">
+                    <div>
+                        <p class="font-bold">Hai, Mahasiswa</p>
+                        <p class="text-sm text-gray-600">Saat ini Anda berada di Semester 5 dengan IPK 3.50. <a href="#" class="text-blue-600 underline">Lihat detail</a></p>
+                    </div>
+                </div>
+                <div class="mt-3 p-2 bg-yellow-100 text-yellow-900 rounded text-sm">
+                    Mahasiswa belum melengkapi biodata. <a href="#" class="underline">Lengkapi di sini</a>
+                </div>
+            </div>
+
+            <!-- Tagihan -->
+            <div class="bg-white p-4 rounded-lg shadow">
+                <p class="font-bold">Total Tagihan</p>
+                <p class="text-2xl font-bold text-blue-800">Rp 5.000.000</p>
+                <p class="text-sm text-gray-600">Kamu sudah membayar Rp 10.000.000 dari Rp 15.000.000</p>
+                <a href="#" class="text-blue-600 underline text-sm">Lihat Rincian</a>
+            </div>
+
+            <!-- Kalender -->
+            <div class="bg-white p-4 rounded-lg shadow">
+                <p class="font-bold mb-2">Kalender Akademik</p>
+                <div class="text-center text-gray-600">October, 2025</div>
+                <!-- Contoh kalender -->
+                <div class="grid grid-cols-7 gap-1 mt-2 text-sm text-gray-600">
+                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                    <!-- tanggal 1-31 -->
+                    <div></div><div></div><div></div><div>1</div><div>2</div><div>3</div><div>4</div>
+                    <div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div>
+                    <div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div>
+                    <div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div><div>25</div>
+                    <div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div>31</div><div></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
 </body>
 </html>
