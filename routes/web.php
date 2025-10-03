@@ -91,5 +91,8 @@ Route::middleware(['auth', 'role:admin_baak'])->prefix('admin')->name('admin.')-
     Route::put('/jadwal/{jadwal}', [AdminJadwal::class, 'update'])->name('jadwal.update');
     Route::delete('/jadwal/{jadwal}', [AdminJadwal::class, 'destroy'])->name('jadwal.destroy');
 
+    // Mata Kuliah Management
+    Route::resource('mata-kuliah', \App\Http\Controllers\AdminBaak\MataKuliahController::class)->names('mata-kuliah');
+
     Route::resource('pembimbing', PembimbingAkademikController::class);
 });

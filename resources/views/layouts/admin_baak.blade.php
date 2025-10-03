@@ -15,6 +15,7 @@
                     <div class="hidden md:flex space-x-4">
                         <a href="{{ route('admin.dashboard') }}" class="hover:bg-purple-700 px-3 py-2 rounded transition">Dashboard</a>
                         <a href="{{ route('admin.jadwal.index') }}" class="hover:bg-purple-700 px-3 py-2 rounded transition">Kelola Jadwal</a>
+                        <a href="{{ route('admin.mata-kuliah.index') }}" class="hover:bg-purple-700 px-3 py-2 rounded transition">Mata Kuliah</a>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
