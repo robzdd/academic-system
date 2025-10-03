@@ -6,15 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\TahunAkademik;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use Carbon\Carbon;
 
 class JadwalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $mahasiswa = Auth::user()->mahasiswa;
         $tahunAktif = TahunAkademik::where('is_active', true)->first();
 
+        // Ambil tanggal dari input, default hari ini
+        $selectedDate = $request->input('tanggal');
+        $selectedCarbon = $selectedDate ? Carbon::parse($selectedDate) : Carbon::now();
+
+        // Ambil semua jadwal KRS mahasiswa di tahun akademik aktif yang disetujui
         $jadwalList = $mahasiswa->krs()
             ->where('tahun_akademik_id', $tahunAktif->id)
             ->where('status', 'disetujui')
@@ -22,11 +27,36 @@ class JadwalController extends Controller
             ->get()
             ->pluck('kelas.jadwalKuliah')
             ->flatten()
-            ->sortBy(function($jadwal) {
-                $days = ['Senin' => 1, 'Selasa' => 2, 'Rabu' => 3, 'Kamis' => 4, 'Jumat' => 5, 'Sabtu' => 6];
-                return ($days[$jadwal->hari] ?? 7) . $jadwal->jam_mulai;
+            // Hitung tanggal_real tiap jadwal sesuai minggu dari tanggal yang dipilih
+            ->map(function ($jadwal) use ($selectedCarbon) {
+                $hariMap = [
+                    'Senin' => 0,
+                    'Selasa' => 1,
+                    'Rabu' => 2,
+                    'Kamis' => 3,
+                    'Jumat' => 4,
+                    'Sabtu' => 5,
+                    'Minggu' => 6,
+                ];
+
+                if(!isset($hariMap[$jadwal->hari])) return null;
+
+                // tanggal_real = start of week + offset hari
+                $tanggal = $selectedCarbon->copy()->startOfWeek()->addDays($hariMap[$jadwal->hari])->toDateString();
+                $jadwal->tanggal_real = $tanggal;
+
+                return $jadwal;
+            })
+            ->filter() // buang null jika ada
+            // Filter hanya jadwal hari yang dipilih
+            ->filter(function ($jadwal) use ($selectedCarbon) {
+                return $jadwal->tanggal_real == $selectedCarbon->toDateString();
+            })
+            // Sort by jam_mulai
+            ->sortBy(function ($jadwal) {
+                return strtotime($jadwal->jam_mulai);
             });
 
-        return view('mahasiswa.jadwal', compact('jadwalList'));
+        return view('mahasiswa.jadwal', compact('jadwalList', 'selectedDate'));
     }
 }
