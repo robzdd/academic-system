@@ -4,11 +4,7 @@
 
 @section('content')
 
-<div class="flex justify-center mb-8">
-    <img src="{{ asset('images/logo/Universitas_Iqra_Buru.png') }}"
-         alt="Logo STMIK Iqra Buru"
-         class="h-24 w-auto">
-</div>
+
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
     <div class="bg-white rounded-lg shadow-md p-6">
@@ -52,6 +48,33 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-md p-6 mb-8">
+    <form method="GET" action="" class="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
+        <div class="flex items-center gap-2">
+            <label for="tanggal" class="text-sm font-semibold text-gray-700">Pilih Tanggal:</label>
+            <input type="date" id="tanggal" name="tanggal" value="{{ $tanggalDipilih }}" class="border rounded px-2 py-1 text-sm" onchange="this.form.submit()">
+        </div>
+        <span class="text-sm text-gray-500">{{ ucfirst($hariDipilih) }}, {{ \Carbon\Carbon::parse($tanggalDipilih)->translatedFormat('d F Y') }}</span>
+    </form>
+    @if($jadwalHariIni->count() > 0)
+        @foreach($jadwalHariIni as $jadwal)
+        <div class="border rounded-lg p-4 mb-4 flex flex-col md:flex-row md:items-center md:justify-between">
+            <div>
+                <div class="font-bold text-lg text-blue-800 mb-1">{{ $jadwal->kelas->mataKuliah->nama_mk }} ({{ $jadwal->kelas->mataKuliah->kode_mk }})</div>
+                <div class="text-sm text-gray-600 mb-1">Kelas {{ $jadwal->kelas->nama_kelas }} | {{ $jadwal->kelas->mataKuliah->sks }} SKS</div>
+                <div class="text-sm text-gray-600 mb-1">Dosen: {{ $jadwal->kelas->dosen->user->username }}</div>
+                <div class="text-sm text-gray-600 mb-1">Ruangan: {{ $jadwal->ruangan }}</div>
+            </div>
+            <div class="flex flex-col items-end mt-2 md:mt-0">
+                <span class="text-sm text-gray-700 font-semibold">{{ date('H:i', strtotime($jadwal->jam_mulai)) }} - {{ date('H:i', strtotime($jadwal->jam_selesai)) }} WIB</span>
+            </div>
+        </div>
+        @endforeach
+    @else
+        <div class="text-center text-gray-400 py-8">Tidak ada jadwal kuliah pada tanggal ini</div>
+    @endif
 </div>
 
 <div class="bg-white rounded-lg shadow-md p-6">

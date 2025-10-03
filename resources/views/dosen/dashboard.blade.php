@@ -53,6 +53,9 @@
             <p class="font-semibold">{{ $tahunAktif->kode_tahun }} - {{ ucfirst($tahunAktif->semester) }}</p>
         </div>
     </div>
+    <div class="mt-4">
+        <a href="{{ route('dosen.bimbingan') }}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition">Lihat Mahasiswa Bimbingan & ACC KRS</a>
+    </div>
 </div>
 
 <div class="bg-white rounded-lg shadow-md p-6">

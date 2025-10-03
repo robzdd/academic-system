@@ -37,7 +37,7 @@
                     <td class="px-4 py-3 text-sm">{{ $krs->kelas->mataKuliah->nama_mk }}</td>
                     <td class="px-4 py-3 text-sm">{{ $krs->kelas->mataKuliah->sks }}</td>
                     <td class="px-4 py-3 text-sm">{{ $krs->kelas->nama_kelas }}</td>
-                    <td class="px-4 py-3 text-sm">{{ $krs->kelas->dosen->user->nama_lengkap }}</td>
+                    <td class="px-4 py-3 text-sm">{{ $krs->kelas->dosen->user->username }}</td>
                     <td class="px-4 py-3 text-sm">
                         <span class="px-2 py-1 rounded text-xs font-semibold
                             @if($krs->status == 'draft') bg-gray-200 text-gray-700
@@ -89,7 +89,7 @@
                     <td class="px-4 py-3 text-sm">{{ $kelas->mataKuliah->nama_mk }}</td>
                     <td class="px-4 py-3 text-sm">{{ $kelas->mataKuliah->sks }}</td>
                     <td class="px-4 py-3 text-sm">{{ $kelas->nama_kelas }}</td>
-                    <td class="px-4 py-3 text-sm">{{ $kelas->dosen->user->nama_lengkap }}</td>
+                    <td class="px-4 py-3 text-sm">{{ $kelas->dosen->user->username }}</td>
                     <td class="px-4 py-3 text-sm">{{ $kelas->jumlah_mahasiswa }}/{{ $kelas->kapasitas }}</td>
                     <td class="px-4 py-3 text-sm">
                         <form method="POST" action="{{ route('mahasiswa.krs.store') }}">

@@ -70,6 +70,10 @@ Route::middleware(['auth', 'role:dosen'])->prefix('dosen')->name('dosen.')->grou
     Route::get('/kelas/{kelas}/nilai', [DosenNilai::class, 'index'])->name('nilai.index');
     Route::post('/nilai/update', [DosenNilai::class, 'update'])->name('nilai.update');
     Route::post('/nilai/update-batch', [DosenNilai::class, 'updateBatch'])->name('nilai.update.batch');
+
+    // Mahasiswa Bimbingan (PA) dan ACC KRS
+    Route::get('/bimbingan', [\App\Http\Controllers\Dosen\DashboardController::class, 'bimbingan'])->name('bimbingan');
+    Route::post('/krs/{krs}/acc', [\App\Http\Controllers\Dosen\DashboardController::class, 'accKrs'])->name('krs.acc');
 });
 
 // ============================================

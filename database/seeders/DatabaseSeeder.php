@@ -218,6 +218,14 @@ class DatabaseSeeder extends Seeder
             'kapasitas' => 40,
             'jumlah_mahasiswa' => 0
         ]);
+        $kelas5 = Kelas::create([
+            'mata_kuliah_id' => $mk2->id,
+            'dosen_id' => $dosen2->id,
+            'tahun_akademik_id' => $tahunAkademik->id,
+            'nama_kelas' => 'B',
+            'kapasitas' => 30,
+            'jumlah_mahasiswa' => 0
+        ]);
 
         // 8. Jadwal Kuliah
         JadwalKuliah::create([
@@ -264,6 +272,16 @@ class DatabaseSeeder extends Seeder
             'ruangan' => 'R.103'
         ]);
 
+        JadwalKuliah::create([
+            'tahun_akademik_id' => $tahunAkademik->id,
+            'mata_kuliah_id' => $mk2->id,     // Add this
+            'dosen_id' => $dosen2->id,        // Add this
+            'kelas_id' => $kelas5->id,
+            'hari' => 'Jumat',
+            'jam_mulai' => '08:00',
+            'jam_selesai' => '10:30',
+            'ruangan' => 'R.105'
+        ]);
         // 9. KRS Mahasiswa 1
         $krs1_1 = Krs::create([
             'mahasiswa_id' => $mahasiswa1->id,
