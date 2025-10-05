@@ -13,6 +13,7 @@ use App\Http\Controllers\Mahasiswa\NilaiController as MahasiswaNilai;
 use App\Http\Controllers\Mahasiswa\JadwalController as MahasiswaJadwal;
 use App\Http\Controllers\AdminBaak\DashboardController as AdminDashboard;
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboard;
+use App\Http\Controllers\Mahasiswa\ProfileController;
 
 // ============================================
 // PUBLIC ROUTES
@@ -48,11 +49,18 @@ Route::middleware(['auth', 'role:mahasiswa'])->prefix('mahasiswa')->name('mahasi
     Route::get('/khs', [KhsController::class, 'index'])->name('khs.index');
     Route::get('/khs/{tahunAkademik}/download', [KhsController::class, 'download'])->name('khs.download');
 
+    // Riwayat KRS
+    Route::get('/krs/riwayat', [KrsController::class, 'riwayat'])->name('krs.riwayat');
+
     // Jadwal Kuliah
     Route::get('/jadwal', [MahasiswaJadwal::class, 'index'])->name('jadwal.index');
 
     // Nilai
     Route::get('/nilai', [MahasiswaNilai::class, 'index'])->name('nilai.index');
+
+    // Profil Mahasiswa
+    // Profil Mahasiswa
+    Route::get('/profil', [ProfileController::class, 'index'])->name('profil');
 });
 
 // ============================================

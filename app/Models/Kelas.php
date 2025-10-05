@@ -38,5 +38,9 @@ class Kelas extends Model
     {
         return $this->hasMany(JadwalKuliah::class);
     }
+    public function tahunAkademik()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'tahun_akademik_id');
+    }
 }
 

@@ -6,6 +6,7 @@
     <title>@yield('title') - SIAKAD Mahasiswa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo/Universitas_Iqra_Buru.png') }}">
 </head>
 <body class="bg-gray-50">
 
@@ -80,7 +81,7 @@
                         <div x-show="d2" @click.away="d2=false"
                              class="absolute bg-white text-gray-700 mt-1 rounded shadow w-56">
                             <a href="{{ route('mahasiswa.krs.index') }}" class="block px-4 py-2 hover:bg-gray-100">Pengisian KRS</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Riwayat KRS</a>
+                            <a href="{{ route('mahasiswa.krs.riwayat') }}" class="block px-4 py-2 hover:bg-gray-100">Riwayat KRS</a>
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100">Mengulang</a>
                             <a href="{{ route('mahasiswa.nilai.index') }}" class="block px-4 py-2 hover:bg-gray-100">Nilai Mahasiswa</a>
                         </div>
@@ -116,7 +117,7 @@
                     </button>
                     <div x-show="d4" @click.away="d4=false"
                          class="absolute right-0 mt-2 w-40 bg-white text-gray-700 rounded shadow">
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Profil</a>
+                        <a href="{{ route('mahasiswa.profil') }}" class="block px-4 py-2 hover:bg-gray-100">Profil</a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100">Logout</button>

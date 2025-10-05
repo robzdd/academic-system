@@ -91,4 +91,25 @@ class KrsController extends Controller
 
         return back()->with('success', 'KRS berhasil diajukan!');
     }
+
+    public function riwayat()
+{
+    $mahasiswa = Auth::user()->mahasiswa;
+
+    // Ambil semua KRS mahasiswa (termasuk semester sebelumnya)
+    $riwayatKrs = $mahasiswa->krs()
+        ->with([
+            'kelas.mataKuliah',
+            'kelas.jadwalKuliah',
+            'kelas.tahunAkademik'
+        ])
+        ->get()
+        // Kelompokkan berdasarkan semester atau tahun akademik
+        ->groupBy(function ($item) {
+            return $item->kelas->tahunAkademik->kode_tahun . ' - ' . ucfirst($item->kelas->tahunAkademik->semester);
+        });
+
+    return view('mahasiswa.riwayat-krs', compact('riwayatKrs'));
+}
+
 }

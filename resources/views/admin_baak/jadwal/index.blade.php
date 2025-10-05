@@ -10,14 +10,14 @@
             <p class="text-gray-600">{{ $tahunAktif->kode_tahun }} - {{ ucfirst($tahunAktif->semester) }}</p>
         </div>
         <a href="{{ route('admin.jadwal.create') }}"
-           class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-lg transition font-semibold shadow-lg">
+           class="bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 text-white px-6 py-3 rounded-lg transition font-semibold shadow-lg">
             + Tambah Jadwal
         </a>
     </div>
 
     <div class="overflow-x-auto">
         <table class="w-full">
-            <thead class="bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+            <thead class="bg-gradient-to-r from-indigo-600 to-cyan-600 text-white">
                 <tr>
                     <th class="px-4 py-3 text-left text-sm font-semibold">Hari</th>
                     <th class="px-4 py-3 text-left text-sm font-semibold">Jam</th>
@@ -36,14 +36,16 @@
                         {{ date('H:i', strtotime($jadwal->jam_mulai)) }} - {{ date('H:i', strtotime($jadwal->jam_selesai)) }}
                     </td>
                     <td class="px-4 py-3 text-sm">
-                        <div class="font-semibold">{{ $jadwal->kelas->mataKuliah->nama_mk }}</div>
-                        <div class="text-xs text-gray-500">{{ $jadwal->kelas->mataKuliah->kode_mk }}</div>
+                        <div class="font-semibold">{{ $jadwal->kelas?->mataKuliah?->nama_mk ?? '-' }}</div>
+                        <div class="text-xs text-gray-500">{{ $jadwal->kelas?->mataKuliah?->kode_mk ?? '-' }}</div>
                     </td>
-                    <td class="px-4 py-3 text-sm">{{ $jadwal->kelas->nama_kelas }}</td>
-                    <td class="px-4 py-3 text-sm">{{ $jadwal->kelas->dosen->user->nama_lengkap }}</td>
+                    <td class="px-4 py-3 text-sm">{{ $jadwal->kelas?->nama_kelas ?? '-' }}</td>
                     <td class="px-4 py-3 text-sm">
-                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-semibold">
-                            {{ $jadwal->ruangan }}
+                        {{ $jadwal->dosen?->user?->username ?? 'Belum ada dosen' }}
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-semibold">
+                            {{ $jadwal->ruangan ?? '-' }}
                         </span>
                     </td>
                     <td class="px-4 py-3 text-sm">
