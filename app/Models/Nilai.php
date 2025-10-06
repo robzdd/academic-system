@@ -8,14 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Nilai extends Model
 {
     use HasFactory;
-    protected $table = ['nilai'];
-    protected $fillable = ['krs_id', 'nilai_huruf', 'nilai_bobot'];
+    protected $table = 'nilai';
+    protected $fillable = ['krs_id','nilai_angka', 'nilai_huruf', 'nilai_bobot'];
 
-    public function mahasiswa() {
-        return $this->belongsTo(Mahasiswa::class);
+    public function krs()
+    {
+        return $this->belongsTo(Krs::class);
     }
 
-    public function mataKuliah() {
-        return $this->belongsTo(MataKuliah::class);
+    // Shortcut: akses langsung ke mahasiswa lewat KRS
+    public function mahasiswa()
+    {
+        return $this->hasOneThrough(Mahasiswa::class, Krs::class, 'id', 'id', 'krs_id', 'mahasiswa_id');
     }
 }
