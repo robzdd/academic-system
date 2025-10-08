@@ -7,24 +7,52 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="icon" type="image/x-icon" href="{{ asset('images/logo/Universitas_Iqra_Buru.png') }}">
+
+      <style>
+        /* ======== Efek Background Geometrik Halus ======== */
+        .nav-geometry {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to right, #2563eb, #1e3a8a); /* fallback warna dasar */
+        }
+
+        .nav-geometry::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('{{ asset('images/mahasiswa/bg/image.png') }}') no-repeat top right;
+            background-size: cover;
+            opacity: 0.12; /* ubah antara 0.1–0.25 sesuai keinginan */
+            mix-blend-mode: overlay; /* atau try: soft-light / multiply / screen */
+            filter: blur(2px) saturate(120%);
+            transform: scale(1.05);
+            z-index: 0;
+        }
+
+        .nav-content {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
 
     <!-- Logo + Nama Kampus -->
-<div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 shadow">
-    <div class="max-w-7xl mx-auto flex items-center space-x-4 px-4">
-        <!-- Logo dalam lingkaran putih -->
-        <div class="bg-white rounded-full p-2 shadow">
-            <img src="{{ asset('images/logo/Universitas_Iqra_Buru.png') }}"
-                 alt="Logo Kampus" class="h-12 w-12 object-contain">
+    <header class="nav-geometry text-white py-4 shadow">
+        <div class="nav-content max-w-7xl mx-auto flex items-center space-x-4 px-4">
+            <div class="bg-white rounded-full p-2 shadow">
+                <img src="{{ asset('images/logo/Universitas_Iqra_Buru.png') }}"
+                     alt="Logo Kampus" class="h-12 w-12 object-contain">
+            </div>
+            <div>
+                <span class="block text-sm font-light">SIM Akademik</span>
+                <h1 class="text-xl font-bold">Universitas Iqra Buru</h1>
+            </div>
         </div>
-        <div>
-            <span class="block text-sm font-light">SIM Akademik</span>
-            <h1 class="text-xl font-bold">Universitas Iqra Buru</h1>
-        </div>
-    </div>
-</div>
-
+    </header>
 
     <!-- Navbar -->
     <nav x-data="{ open:false }" class="bg-blue-700 text-white shadow-md">
@@ -103,6 +131,23 @@
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100">Transkrip</a>
                         </div>
                     </div>
+
+                    <!-- Dropdown Pembayaran -->
+                    <div class="relative" x-data="{ d9:false }">
+                        <button @click="d9=!d9"
+                                class="px-3 py-2 flex items-center border-b-2 {{ request()->is('mahasiswa/khs*') || request()->is('mahasiswa/transkrip*') ? 'border-white font-semibold' : 'border-transparent hover:border-gray-200' }}">
+                            Pembayaran
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div x-show="d9" @click.away="d9=false"
+                             class="absolute bg-white text-gray-700 mt-1 rounded shadow w-48">
+                            <a href="" class="block px-4 py-2 hover:bg-gray-100">Tagihan</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Riwayat Tagihan</a>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Menu Kanan -->
@@ -133,6 +178,7 @@
             <a href="{{ route('mahasiswa.jadwal.index') }}" class="block px-4 py-2 border-b border-blue-600 hover:bg-blue-600">Jadwal</a>
             <a href="{{ route('mahasiswa.krs.index') }}" class="block px-4 py-2 border-b border-blue-600 hover:bg-blue-600">Akademik</a>
             <a href="{{ route('mahasiswa.khs.index') }}" class="block px-4 py-2 border-b border-blue-600 hover:bg-blue-600">Hasil Studi</a>
+            <a href="" class="block px-4 py-2 border-b border-blue-600 hover:bg-blue-600">Pembayaran</a>
             <form action="{{ route('logout') }}" method="POST" class="px-4 py-2">
                 @csrf
                 <button type="submit" class="w-full text-left">Logout</button>
