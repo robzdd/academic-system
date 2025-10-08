@@ -1,6 +1,6 @@
-@extends('layouts.mahasiswa')
+    @extends('layouts.mahasiswa')
 
-@section('title', 'Dashboard')
+    @section('title', 'Dashboard')
 
 @section('content')
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -103,35 +103,17 @@
         @endif
     </div>
 
-    {{-- BAGIAN KANAN --}}
-    <div class="space-y-6">
-        {{-- INFORMASI MAHASISWA --}}
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex items-center space-x-3 mb-3">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="icon" class="w-10 h-10">
-                <div>
-                    <h2 class="text-lg font-bold text-gray-800">
-                        Hai, {{ strtoupper(Auth::user()->username) }}
-                    </h2>
-                    <p class="text-sm text-gray-600">
-                        Saat ini Anda berada di Semester {{ $mahasiswa->semester_aktif }}
-                        dengan IPK <span class="font-semibold text-blue-700">{{ number_format($ipk, 2) }}</span>.
-                        <a href="#" class="text-blue-600 hover:underline">Lihat detail</a>
-                    </p>
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 text-sm text-gray-700 rounded">
+                    Mahasiswa belum melengkapi biodata.
+                    <a href="#" class="text-blue-600 hover:underline">Lengkapi di sini</a>
                 </div>
             </div>
 
-            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 text-sm text-gray-700 rounded">
-                Mahasiswa belum melengkapi biodata.
-                <a href="#" class="text-blue-600 hover:underline">Lengkapi di sini</a>
+            {{-- GRAFIK IPS (REAL DATABASE) --}}
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">Grafik IPS per Semester</h2>
+                <canvas id="ipkChart" height="180"></canvas>
             </div>
-        </div>
-
-        {{-- GRAFIK IPS (REAL DATABASE) --}}
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">Grafik IPS per Semester</h2>
-            <canvas id="ipkChart" height="180"></canvas>
-        </div>
 
         {{-- Kalender Akademik --}}
         <div class="bg-white p-4 rounded-xl shadow-md mt-6">
@@ -180,48 +162,47 @@
             </div>
         </div>
     </div>
-</div>
 
-{{-- SCRIPT UNTUK GRAFIK IPS --}}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const ctx = document.getElementById('ipkChart').getContext('2d');
-    const ipkChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: @json(array_map(fn($s) => 'Semester '.$s, $labels)),
-            datasets: [{
-                label: 'IPS',
-                data: @json($dataIps),
-                borderColor: '#2563eb',
-                backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 5,
-                pointBackgroundColor: '#2563eb'
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: false,
-                    min: 0,
-                    max: 4,
-                    ticks: {
-                        stepSize: 0.5
-                    }
-                }
+    {{-- SCRIPT UNTUK GRAFIK IPS --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('ipkChart').getContext('2d');
+        const ipkChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: @json(array_map(fn($s) => 'Semester '.$s, $labels)),
+                datasets: [{
+                    label: 'IPS',
+                    data: @json($dataIps),
+                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#2563eb'
+                }]
             },
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    callbacks: {
-                        label: ctx => `IPS: ${ctx.formattedValue}`
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 0,
+                        max: 4,
+                        ticks: {
+                            stepSize: 0.5
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => `IPS: ${ctx.formattedValue}`
+                        }
                     }
                 }
             }
-        }
-    });
-</script>
-@endsection
+        });
+    </script>
+    @endsection
