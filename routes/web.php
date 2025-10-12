@@ -8,6 +8,8 @@ use App\Http\Controllers\Mahasiswa\KrsController;
 use App\Http\Controllers\Dosen\NilaiController as DosenNilai;
 use App\Http\Controllers\AdminBaak\PembimbingAkademikController;
 use App\Http\Controllers\AdminBaak\JadwalController as AdminJadwal;
+use App\Http\Controllers\AdminBaak\TagihanUktController;
+use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\Dosen\DashboardController as DosenDashboard;
 use App\Http\Controllers\Mahasiswa\NilaiController as MahasiswaNilai;
 use App\Http\Controllers\Mahasiswa\JadwalController as MahasiswaJadwal;
@@ -55,6 +57,10 @@ Route::middleware(['auth', 'role:mahasiswa'])->prefix('mahasiswa')->name('mahasi
     // Jadwal Kuliah
     Route::get('/jadwal', [MahasiswaJadwal::class, 'index'])->name('jadwal.index');
 
+    // Tagihan
+    Route::get('/dashboard', [\App\Http\Controllers\Mahasiswa\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/tagihan', [TagihanController::class, 'index'])->name('tagihan.index');
+
     // Nilai
     Route::get('/nilai', [MahasiswaNilai::class, 'index'])->name('nilai.index');
 
@@ -87,7 +93,11 @@ Route::middleware(['auth', 'role:dosen'])->prefix('dosen')->name('dosen.')->grou
 // ============================================
 // ADMIN BAAK ROUTES
 // ============================================
-Route::middleware(['auth', 'role:admin_baak'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:admin_baak'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
     // Dashboard
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
 
@@ -100,7 +110,16 @@ Route::middleware(['auth', 'role:admin_baak'])->prefix('admin')->name('admin.')-
     Route::delete('/jadwal/{jadwal}', [AdminJadwal::class, 'destroy'])->name('jadwal.destroy');
 
     // Mata Kuliah Management
-    Route::resource('mata-kuliah', \App\Http\Controllers\AdminBaak\MataKuliahController::class)->names('mata-kuliah');
+    Route::resource('mata-kuliah', \App\Http\Controllers\AdminBaak\MataKuliahController::class)
+        ->names('mata-kuliah');
 
+    // Pembimbing Akademik
     Route::resource('pembimbing', PembimbingAkademikController::class);
+
+    // Tagihan UKT
+    Route::get('/tagihan', [TagihanUktController::class, 'index'])->name('tagihan.index');
+    Route::get('/tagihan/create', [TagihanUktController::class, 'create'])->name('tagihan.create');
+    Route::post('/tagihan', [TagihanUktController::class, 'store'])->name('tagihan.store');
+    Route::get('/tagihan/{id}', [TagihanUktController::class, 'show'])->name('tagihan.show');
+    Route::delete('/tagihan/{id}', [TagihanUktController::class, 'destroy'])->name('tagihan.destroy');
 });

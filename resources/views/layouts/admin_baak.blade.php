@@ -40,9 +40,12 @@
                        class="px-3 py-2 rounded-md transition font-medium {{ request()->routeIs('admin.mata-kuliah.index') ? 'bg-white text-indigo-700' : 'hover:bg-blue-700/40' }}">
                         Mata Kuliah
                     </a>
+                    <a href="{{ route('admin.tagihan.index') }}"
+                       class="px-3 py-2 rounded-md transition font-medium {{ request()->routeIs('admin.tagihan.index') ? 'bg-white text-indigo-700' : 'hover:bg-blue-700/40' }}">
+                       Tagihan UKT
+                    </a>
                 </div>
             </div>
-
             <!-- Kanan: Profil -->
             <div class="relative" x-data="{ dropdown:false }">
                 <button @click="dropdown = !dropdown" 
@@ -83,6 +86,7 @@
             <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 hover:bg-blue-800/50">Dashboard</a>
             <a href="{{ route('admin.jadwal.index') }}" class="block px-4 py-2 hover:bg-blue-800/50">Kelola Jadwal</a>
             <a href="{{ route('admin.mata-kuliah.index') }}" class="block px-4 py-2 hover:bg-blue-800/50">Mata Kuliah</a>
+            <a href="{{ route('admin.tagihan.index') }}" class="block px-4 py-2 hover:bg-blue-800/50">Tagihan UKT</a>
             <form method="POST" action="{{ route('logout') }}" class="border-t border-blue-600">
                 @csrf
                 <button type="submit" class="w-full text-left px-4 py-2 hover:bg-blue-800/50">Logout</button>

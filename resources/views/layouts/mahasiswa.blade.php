@@ -160,7 +160,7 @@
                         </button>
                         <div x-show="d4" x-transition x-cloak
                              class="dropdown-menu absolute bg-white text-gray-700 mt-2 rounded-md shadow-lg w-48">
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Tagihan</a>
+                            <a href="{{ route('mahasiswa.tagihan.index') }}" class="block px-4 py-2 hover:bg-gray-100">Tagihan</a>
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100">Riwayat Pembayaran</a>
                         </div>
                     </div>

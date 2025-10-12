@@ -42,4 +42,8 @@ class Mahasiswa extends Model
         return $this->hasMany(PembimbingAkademik::class);
     }
 
+        public function tagihan()
+    {
+        return $this->hasMany(\App\Models\TagihanUkt::class, 'mahasiswa_id');
+    }
 }
